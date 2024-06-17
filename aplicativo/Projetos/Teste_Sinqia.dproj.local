@@ -18,5 +18,13 @@
     <Transaction>2024/06/13 22:01:22.000.820,=C:\TesteSinqia\Projetos\Unit1.pas</Transaction>
     <Transaction>2024/06/13 22:02:57.000.012,C:\TesteSinqia\Projetos\Unit1.dfm=C:\TesteSinqia\DCU\U_Relatorio.dfm</Transaction>
     <Transaction>2024/06/13 22:02:57.000.012,C:\TesteSinqia\Projetos\Unit1.pas=C:\TesteSinqia\DCU\U_Relatorio.pas</Transaction>
+    <Transaction>2024/06/17 00:14:02.199,=C:\TesteSinqia\forms\U_Clientes.pas</Transaction>
+    <Transaction>2024/06/17 00:14:02.205,=C:\TesteSinqia\forms\U_Cidades.pas</Transaction>
+    <Transaction>2024/06/17 00:14:02.213,=C:\TesteSinqia\forms\U_Relatorio.pas</Transaction>
+    <Transaction>2024/06/17 00:14:02.221,=C:\TesteSinqia\forms\U_Conexao.pas</Transaction>
+    <Transaction>2024/06/17 00:16:05.435,C:\TesteSinqia\forms\U_Conexao.pas=</Transaction>
+    <Transaction>2024/06/17 00:16:14.227,=C:\TesteSinqia\forms\U_Conexao.pas</Transaction>
+    <Transaction>2024/06/17 00:26:55.748,C:\TesteSinqia\forms\U_Conexao.pas=</Transaction>
+    <Transaction>2024/06/17 00:28:02.803,=C:\TesteSinqia\forms\U_Conexao.pas</Transaction>
   </Transactions>
 </BorlandProject>

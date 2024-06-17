@@ -91,22 +91,22 @@
             <Form>FrmPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\DCU\U_Conexao.pas">
-            <Form>dmConexao</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\DCU\U_Cidades.pas">
-            <Form>frmCadastroCidades</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\DCU\U_Clientes.pas">
+        <DCCReference Include="..\forms\U_Clientes.pas">
             <Form>frmCadastroClientes</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\DCU\U_Relatorio.pas">
+        <DCCReference Include="..\forms\U_Cidades.pas">
+            <Form>frmCadastroCidades</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\forms\U_Relatorio.pas">
             <Form>frmRelatorio</Form>
             <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\forms\U_Conexao.pas">
+            <Form>dmConexao</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

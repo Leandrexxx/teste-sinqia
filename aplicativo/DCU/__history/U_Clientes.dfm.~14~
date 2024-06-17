@@ -1,0 +1,438 @@
+object frmCadastroClientes: TfrmCadastroClientes
+  Left = 0
+  Top = 0
+  Caption = 'Cadastro Clientes'
+  ClientHeight = 418
+  ClientWidth = 945
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label7: TLabel
+    Left = 402
+    Top = 60
+    Width = 46
+    Height = 14
+    Caption = 'Pesquisa'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 40
+    Top = 24
+    Width = 215
+    Height = 25
+    Caption = 'Cadastro de Clientes'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label11: TLabel
+    Left = 32
+    Top = 312
+    Width = 33
+    Height = 13
+    Caption = 'Cidade'
+  end
+  object Label1: TLabel
+    Left = 32
+    Top = 72
+    Width = 33
+    Height = 13
+    Caption = 'C'#243'digo'
+    FocusControl = dbedtCodigo
+  end
+  object Label2: TLabel
+    Left = 120
+    Top = 72
+    Width = 19
+    Height = 13
+    Caption = 'CPF'
+    FocusControl = dbedtCpf
+  end
+  object Label3: TLabel
+    Left = 32
+    Top = 120
+    Width = 27
+    Height = 13
+    Caption = 'Nome'
+    FocusControl = dbedtNome
+  end
+  object Label4: TLabel
+    Left = 32
+    Top = 261
+    Width = 42
+    Height = 13
+    Caption = 'Telefone'
+    FocusControl = dbedtTelefone
+  end
+  object Label5: TLabel
+    Left = 32
+    Top = 168
+    Width = 45
+    Height = 13
+    Caption = 'Endere'#231'o'
+    FocusControl = dbedtEndereco
+  end
+  object Label8: TLabel
+    Left = 32
+    Top = 216
+    Width = 28
+    Height = 13
+    Caption = 'Bairro'
+    FocusControl = dbedtBairro
+  end
+  object Label9: TLabel
+    Left = 248
+    Top = 213
+    Width = 65
+    Height = 13
+    Caption = 'Complemento'
+    FocusControl = dbedtComplemento
+  end
+  object Label10: TLabel
+    Left = 128
+    Top = 259
+    Width = 28
+    Height = 13
+    Caption = 'e-mail'
+    FocusControl = dbedtEmail
+  end
+  object Label12: TLabel
+    Left = 269
+    Top = 315
+    Width = 19
+    Height = 13
+    Caption = 'CEP'
+    FocusControl = dbedtCep
+  end
+  object btnExcluir: TBitBtn
+    Left = 170
+    Top = 367
+    Width = 65
+    Height = 35
+    Caption = 'Excluir'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnClick = btnExcluirClick
+  end
+  object btnEditar: TBitBtn
+    Left = 99
+    Top = 367
+    Width = 65
+    Height = 35
+    Caption = 'Editar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 11
+    OnClick = btnEditarClick
+  end
+  object btnNovo: TBitBtn
+    Left = 28
+    Top = 367
+    Width = 65
+    Height = 35
+    Caption = 'Novo'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 12
+    OnClick = btnNovoClick
+  end
+  object btnCancelar: TBitBtn
+    Left = 241
+    Top = 367
+    Width = 65
+    Height = 35
+    Caption = 'Cancelar'
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 13
+    OnClick = btnCancelarClick
+  end
+  object btnGravar: TBitBtn
+    Left = 312
+    Top = 367
+    Width = 65
+    Height = 35
+    Caption = 'Gravar'
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 14
+    OnClick = btnGravarClick
+  end
+  object edtPesquisa: TEdit
+    Left = 402
+    Top = 80
+    Width = 503
+    Height = 22
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 10
+    OnKeyDown = edtPesquisaKeyDown
+  end
+  object DBGrid1: TDBGrid
+    Left = 402
+    Top = 108
+    Width = 503
+    Height = 277
+    DataSource = dsCadastroClientes
+    TabOrder = 15
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'NOME'
+        Width = 244
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CGC_CPF_CLIENTE'
+        Width = 118
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TELEFONE'
+        Width = 103
+        Visible = True
+      end>
+  end
+  object dblkCidade: TDBLookupComboBox
+    Left = 32
+    Top = 331
+    Width = 223
+    Height = 21
+    DataField = 'CODIGO_CIDADE'
+    DataSource = dsCadastroClientes
+    KeyField = 'CODIGO_CIDADE'
+    ListField = 'NOME'
+    ListSource = dsCidades
+    TabOrder = 8
+  end
+  object dbedtCodigo: TDBEdit
+    Left = 32
+    Top = 88
+    Width = 72
+    Height = 21
+    DataField = 'CODIGO_CLIENTE'
+    DataSource = dsCadastroClientes
+    Enabled = False
+    TabOrder = 16
+  end
+  object dbedtCpf: TDBEdit
+    Left = 120
+    Top = 88
+    Width = 186
+    Height = 21
+    DataField = 'CGC_CPF_CLIENTE'
+    DataSource = dsCadastroClientes
+    TabOrder = 1
+  end
+  object dbedtNome: TDBEdit
+    Left = 32
+    Top = 136
+    Width = 345
+    Height = 21
+    DataField = 'NOME'
+    DataSource = dsCadastroClientes
+    TabOrder = 2
+  end
+  object dbedtTelefone: TDBEdit
+    Left = 32
+    Top = 277
+    Width = 81
+    Height = 21
+    DataField = 'TELEFONE'
+    DataSource = dsCadastroClientes
+    TabOrder = 6
+  end
+  object dbedtEndereco: TDBEdit
+    Left = 32
+    Top = 184
+    Width = 345
+    Height = 21
+    DataField = 'ENDERECO'
+    DataSource = dsCadastroClientes
+    TabOrder = 3
+  end
+  object dbedtBairro: TDBEdit
+    Left = 32
+    Top = 232
+    Width = 193
+    Height = 21
+    DataField = 'BAIRRO'
+    DataSource = dsCadastroClientes
+    TabOrder = 4
+  end
+  object dbedtComplemento: TDBEdit
+    Left = 248
+    Top = 232
+    Width = 129
+    Height = 21
+    DataField = 'COMPLEMENTO'
+    DataSource = dsCadastroClientes
+    TabOrder = 5
+  end
+  object dbedtEmail: TDBEdit
+    Left = 128
+    Top = 277
+    Width = 249
+    Height = 21
+    CharCase = ecLowerCase
+    DataField = 'EMAIL'
+    DataSource = dsCadastroClientes
+    TabOrder = 7
+  end
+  object dbedtCep: TDBEdit
+    Left = 269
+    Top = 331
+    Width = 108
+    Height = 21
+    DataField = 'cep'
+    DataSource = dsCadastroClientes
+    TabOrder = 9
+  end
+  object dsCadastroClientes: TDataSource
+    DataSet = qryCadastroCliente
+    Left = 784
+    Top = 344
+  end
+  object qryCidades: TADOQuery
+    Connection = dmConexao.conexao
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from cidades')
+    Left = 544
+    Top = 352
+  end
+  object dsCidades: TDataSource
+    DataSet = qryCidades
+    Left = 624
+    Top = 352
+  end
+  object qryCadastroCliente: TADOQuery
+    Connection = dmConexao.conexao
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from clientes')
+    Left = 704
+    Top = 344
+    object qryCadastroClienteCODIGO_CLIENTE: TAutoIncField
+      FieldName = 'CODIGO_CLIENTE'
+      ReadOnly = True
+    end
+    object qryCadastroClienteCGC_CPF_CLIENTE: TStringField
+      FieldName = 'CGC_CPF_CLIENTE'
+      EditMask = '000\.000\.000\-00;0;_'
+      Size = 14
+    end
+    object qryCadastroClienteNOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object qryCadastroClienteTELEFONE: TStringField
+      FieldName = 'TELEFONE'
+      EditMask = '!\(99\)00000-0000;0;_'
+      Size = 14
+    end
+    object qryCadastroClienteENDERECO: TStringField
+      FieldName = 'ENDERECO'
+      Size = 100
+    end
+    object qryCadastroClienteBAIRRO: TStringField
+      FieldName = 'BAIRRO'
+      Size = 50
+    end
+    object qryCadastroClienteCOMPLEMENTO: TStringField
+      FieldName = 'COMPLEMENTO'
+      Size = 50
+    end
+    object qryCadastroClienteEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object qryCadastroClienteCODIGO_CIDADE: TIntegerField
+      FieldName = 'CODIGO_CIDADE'
+    end
+    object qryCadastroClientecep: TStringField
+      FieldName = 'cep'
+      EditMask = '00000\-999;0;_'
+      Size = 8
+    end
+  end
+  object qryVerificaCep: TADOQuery
+    Active = True
+    Connection = dmConexao.conexao
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'codCidade'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end
+      item
+        Name = 'cep'
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 8
+        Value = Null
+      end>
+    SQL.Strings = (
+      'Select * from cidades'
+      'where codigo_cidade = :codCidade '
+      'and :cep between cep_inicial and cep_final')
+    Left = 464
+    Top = 216
+  end
+end

@@ -1,0 +1,262 @@
+unit U_Relatorio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, ppCtrls,
+  ppPrnabl, ppClass, ppDB, ppBands, ppCache, ppDesignLayer, ppParameter,
+  Data.DB, Data.Win.ADODB, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe;
+
+type
+  TfrmRelatorio = class(TForm)
+    Label6: TLabel;
+    qryRel: TADOQuery;
+    dsRel: TDataSource;
+    ckCidades: TCheckBox;
+    btnImprimir: TBitBtn;
+    btnLimpar: TBitBtn;
+    btnSair: TBitBtn;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    edtClienteInicio: TEdit;
+    Label2: TLabel;
+    edtClienteFinal: TEdit;
+    edtCidadeInicio: TEdit;
+    Label3: TLabel;
+    edtCidadeFinal: TEdit;
+    Label4: TLabel;
+    GroupBox3: TGroupBox;
+    edtEstado: TEdit;
+    pprRel: TppReport;
+    ppParameterList2: TppParameterList;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppHeaderBand2: TppHeaderBand;
+    ppDetailBand2: TppDetailBand;
+    ppFooterBand2: TppFooterBand;
+    ppRel: TppDBPipeline;
+    ppLabel4: TppLabel;
+    ppDBText4: TppDBText;
+    ppLabel6: TppLabel;
+    ppDBText6: TppDBText;
+    ppLabel7: TppLabel;
+    ppDBText7: TppDBText;
+    ppLabel8: TppLabel;
+    ppDBText8: TppDBText;
+    ppLabel9: TppLabel;
+    ppDBText9: TppDBText;
+    ppLabel10: TppLabel;
+    ppDBText10: TppDBText;
+    ppLabel11: TppLabel;
+    qryRelCODIGO_CLIENTE: TAutoIncField;
+    qryRelCGC_CPF_CLIENTE: TStringField;
+    qryRelnome_cliente: TStringField;
+    qryReltelefone: TStringField;
+    qryRelendereco: TStringField;
+    qryRelbairro: TStringField;
+    qryRelcep: TStringField;
+    ppLabel12: TppLabel;
+    ppDBText12: TppDBText;
+    ppRelCidadeAgrupada: TppReport;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppLabel1: TppLabel;
+    ppDBText1: TppDBText;
+    ppLabel2: TppLabel;
+    ppDBText2: TppDBText;
+    ppLabel3: TppLabel;
+    ppDBText3: TppDBText;
+    ppLabel5: TppLabel;
+    ppDBText5: TppDBText;
+    ppLabel13: TppLabel;
+    ppDBText13: TppDBText;
+    ppLabel14: TppLabel;
+    ppDBText14: TppDBText;
+    ppLabel16: TppLabel;
+    ppDBText16: TppDBText;
+    ppFooterBand1: TppFooterBand;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList1: TppParameterList;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppLabel15: TppLabel;
+    ppLine1: TppLine;
+    ppLabel17: TppLabel;
+    ppLine2: TppLine;
+    ppLine3: TppLine;
+    qryRelcidadeEstado: TStringField;
+    ppDBText11: TppDBText;
+    qryRelnome_cidade: TStringField;
+    ppDBText15: TppDBText;
+    procedure edtClienteInicioKeyPress(Sender: TObject; var Key: Char);
+    procedure edtClienteFinalKeyPress(Sender: TObject; var Key: Char);
+    procedure edtCidadeInicioKeyPress(Sender: TObject; var Key: Char);
+    procedure edtCidadeFinalKeyPress(Sender: TObject; var Key: Char);
+    procedure btnImprimirClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure pprRelAfterPrint(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
+    procedure edtEstadoKeyPress(Sender: TObject; var Key: Char);
+    procedure ppRelCidadeAgrupadaAfterPrint(Sender: TObject);
+  private
+  procedure somenteNumeros(var Key:Char);
+  procedure somenteLetras(var Key:Char);
+
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelatorio: TfrmRelatorio;
+
+implementation
+
+{$R *.dfm}
+
+uses U_Conexao;
+
+procedure TfrmRelatorio.somenteNumeros(var Key:Char);
+begin
+  if not (Key in ['0'..'9', #8, #9, #13, #27]) then
+  begin
+    Key := #0;
+  end;
+
+end;
+
+procedure TfrmRelatorio.somenteLetras(var Key:Char);
+begin
+  if not (Key in ['A'..'Z', 'a'..'z', #8, #9, #13, #27]) then
+  begin
+    Key := #0;
+  end;
+
+end;
+
+procedure TfrmRelatorio.btnImprimirClick(Sender: TObject);
+begin
+if ((edtClienteInicio.Text <> '') and  (edtClienteFinal.Text  = '' )) or
+ ((edtClienteInicio.Text = '') and  (edtClienteFinal.Text  <> '' )) then
+begin
+  ShowMessage('ATENÇÃO: É preciso passar o intervalo dos códigos que deseja nos dois campos!');
+  exit;
+  end;
+
+if ((edtCidadeInicio.Text <> '') and  (edtCidadeFinal.Text  = '' )) or
+ ((edtCidadeInicio.Text = '') and  (edtCidadeFinal.Text  <> '' )) then
+begin
+  ShowMessage('ATENÇÃO: É preciso passar o intervalo dos códigos que deseja nos dois campos!');
+  exit;
+end;
+
+  qryRel.Close;
+  qryRel.SQL.Clear;
+  qryRel.SQL.Add('Select cli.CODIGO_CLIENTE,cli.CGC_CPF_CLIENTE,cli.nome as nome_cliente,cli.telefone,cli.endereco,cli.bairro,cli.cep,cid.nome as nome_cidade,cid.nome+ '' - '' + cid.estado as cidadeEstado from clientes cli');
+  qryRel.SQL.Add('inner join cidades cid on cid.CODIGO_CIDADE = cli.CODIGO_CIDADE');
+  qryRel.SQL.Add('Where 1 = 1  ');
+
+  if (edtClienteInicio.Text <> '') and  (edtClienteFinal.Text  <> '' ) then
+  begin
+  qryRel.SQL.Add('AND cli.codigo_cliente between :codClienteInicio and :codClienteFinal');
+  qryRel.Parameters.ParamByName('codClienteInicio').Value := edtClienteInicio.Text;
+  qryRel.Parameters.ParamByName('codClienteFinal').Value := edtClienteFinal.Text;
+  end;
+
+  if (edtCidadeInicio.Text <> '') and  (edtCidadeFinal.Text  <> '' ) then
+  begin
+  qryRel.SQL.Add('AND cli.codigo_cidade between :codCidadeInicio and :codCidadeFinal');
+  qryRel.Parameters.ParamByName('codCidadeInicio').Value := edtCidadeInicio.Text;
+  qryRel.Parameters.ParamByName('codCidadeFinal').Value := edtCidadeFinal.Text;
+  end;
+
+  if edtEstado.Text <> '' then
+  begin
+  qryRel.SQL.Add('AND estado = :estado ');
+  qryRel.Parameters.ParamByName('estado').Value := edtEstado.Text;
+  end;
+
+  if ckCidades.Checked then
+  begin
+    qryRel.SQL.Add('order by cid.nome,cli.nome');
+  end
+  else
+  begin
+    qryRel.SQL.Add('order by cli.nome,cid.nome');
+  end;
+
+  qryRel.Open;
+
+ if not(qryRel.IsEmpty) then
+ begin
+   if not(ckCidades.Checked) then
+   begin
+    pprRel.Print;
+   end
+   else
+   begin
+    ppRelCidadeAgrupada.Print;
+   end;
+ end
+ else
+ begin
+   ShowMessage('Nenhum registro foi encontrado!');
+ end;
+
+end;
+
+procedure TfrmRelatorio.btnLimparClick(Sender: TObject);
+begin
+  edtClienteInicio.Clear;
+  edtClienteFinal.Clear;
+  edtCidadeInicio.Clear;
+  edtCidadeFinal.Clear;
+  edtEstado.Clear;
+end;
+
+procedure TfrmRelatorio.btnSairClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmRelatorio.edtCidadeFinalKeyPress(Sender: TObject; var Key: Char);
+begin
+  somenteNumeros(Key);
+end;
+
+procedure TfrmRelatorio.edtCidadeInicioKeyPress(Sender: TObject; var Key: Char);
+begin
+  somenteNumeros(Key);
+end;
+
+procedure TfrmRelatorio.edtClienteFinalKeyPress(Sender: TObject; var Key: Char);
+begin
+  somenteNumeros(Key);
+end;
+
+procedure TfrmRelatorio.edtClienteInicioKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  somenteNumeros(Key);
+end;
+
+procedure TfrmRelatorio.edtEstadoKeyPress(Sender: TObject; var Key: Char);
+begin
+  somenteLetras(Key);
+end;
+
+procedure TfrmRelatorio.ppRelCidadeAgrupadaAfterPrint(Sender: TObject);
+begin
+  qryRel.Close;
+end;
+
+procedure TfrmRelatorio.pprRelAfterPrint(Sender: TObject);
+begin
+  qryRel.Close;
+end;
+
+end.

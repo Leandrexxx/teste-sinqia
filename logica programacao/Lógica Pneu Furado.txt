@@ -1,0 +1,31 @@
+C - LÓGICA DE PROGRAMAÇÃO
+1. Monte um arquivo texto com um algoritmo, passo a passo, para troca de um pneu de carro que furou.
+
+2. Ligue a seta para o lado do acostamento.
+3. Reduza a velocidade.
+4. Encoste o carro.
+5. Desligue o carro.
+6. Saia do carro.
+7. Abra o porta-malas.
+8. Retire o step e os acessórios para a troca.
+9. Pegue o triângulo.
+10. Coloque o triângulo a 6 metros atrás do carro.
+11. Pegue a chave de roda.
+12. Afrouxe os parafusos do pneu furado.
+13. Coloque o macaco na lateral próxima ao pneu furado.
+14. Gire a manivela do macaco para erguer o carro.
+15. Retire os parafusos da roda.
+16. Retire a roda.
+17. Coloque o step.
+18. Coloque os parafusos na roda.
+19. Aperte os parafusos sem muita força.
+20. Gire a manivela do macaco para baixar o carro.
+21. Aperte os parafusos ao máximo.
+22. Pegue a roda e os acessórios.
+23. Coloque-os de volta no porta-malas.
+24. Feche o porta-malas.
+25. Entre no carro.
+26. Ligue o carro.
+27. Dê seta para o lado que vai sair.
+28. Saia com o carro.
+29. Boa viagem.

@@ -1,4 +1,4 @@
-8. Criar um procedimento armazenado (procedure) para realizar as operações de INSERT, UPDATE E DELETE na tabela de CIDADES. Criar uma procedure única que faça todas as operações. Ela pode ser usada no aplicativo criado, se desejar. (Criar um arquivo separado)
+--8. Criar um procedimento armazenado (procedure) para realizar as operações de INSERT, UPDATE E DELETE na tabela de CIDADES. Criar uma procedure única que faça todas as operações. Ela pode ser usada no aplicativo criado, se desejar. (Criar um arquivo separado)
 
 DROP PROCEDURE IF EXISTS proc_cidades
 GO

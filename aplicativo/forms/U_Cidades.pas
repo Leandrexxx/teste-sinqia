@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
   Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls, Data.DB, Data.Win.ADODB, ppCtrls,
   ppPrnabl, ppClass, ppBands, ppCache, ppDesignLayer, ppParameter, ppProd,
-  ppReport, ppComm, ppRelatv, ppDB, ppDBPipe;
+  ppReport, ppComm, ppRelatv, ppDB, ppDBPipe, Vcl.ComCtrls, Vcl.ExtCtrls;
 
 type
   TfrmCadastroCidades = class(TForm)
@@ -18,34 +18,8 @@ type
     qryCadastroCidadesESTADO: TStringField;
     qryCadastroCidadesCEP_INICIAL: TStringField;
     qryCadastroCidadesCEP_FINAL: TStringField;
-    edtPesquisa: TEdit;
-    Label1: TLabel;
-    dbeditCodigo: TDBEdit;
-    Label2: TLabel;
-    dbedtNome: TDBEdit;
-    Label3: TLabel;
-    dbedtUf: TDBEdit;
-    Label4: TLabel;
-    dbedtCepInicial: TDBEdit;
-    Label5: TLabel;
-    dbedtCepFinal: TDBEdit;
-    btnExcluir: TBitBtn;
-    btnEditar: TBitBtn;
-    btnNovo: TBitBtn;
-    Label6: TLabel;
-    Label7: TLabel;
-    btnCancelar: TBitBtn;
-    btnGravar: TBitBtn;
-    Label8: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    btnSair: TBitBtn;
     qryVerificaCidade: TADOQuery;
     qryVerificaCidadeCliente: TADOQuery;
-    btnRelatorio: TBitBtn;
-    gridPesquisa: TDBGrid;
     qryRelCidades: TADOQuery;
     dsRelCidades: TDataSource;
     prRelCidades: TppReport;
@@ -67,6 +41,39 @@ type
     ppLine1: TppLine;
     ppLabel5: TppLabel;
     ppLine2: TppLine;
+    Panel1: TPanel;
+    btnNovo: TBitBtn;
+    btnEditar: TBitBtn;
+    btnExcluir: TBitBtn;
+    btnCancelar: TBitBtn;
+    btnGravar: TBitBtn;
+    PageControl1: TPageControl;
+    tabConsulta: TTabSheet;
+    tabCadastro: TTabSheet;
+    gridPesquisa: TDBGrid;
+    edtPesquisa: TEdit;
+    Label7: TLabel;
+    dbedtUf: TDBEdit;
+    dbedtCepInicial: TDBEdit;
+    dbedtCepFinal: TDBEdit;
+    Label5: TLabel;
+    Label4: TLabel;
+    Label3: TLabel;
+    Label8: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    dbedtNome: TDBEdit;
+    Label2: TLabel;
+    dbeditCodigo: TDBEdit;
+    Label1: TLabel;
+    Label10: TLabel;
+    btnSair: TBitBtn;
+    btnRelatorio: TBitBtn;
+    Label6: TLabel;
+    rbNome: TRadioButton;
+    Label13: TLabel;
+    rbUf: TRadioButton;
+    Label9: TLabel;
     procedure btnNovoClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -277,6 +284,7 @@ end;
 
 procedure TfrmCadastroCidades.btnNovoClick(Sender: TObject);
 begin
+  PageControl1.ActivePage := tabCadastro;
   qryCadastroCidades.Insert;
   trocarEstadoBotoes;
   dbedtNome.SetFocus;
@@ -341,11 +349,22 @@ end;
 procedure TfrmCadastroCidades.edtPesquisaKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+//  qryCadastroCidades.Locate('nome',edtPesquisa.Text,[loPartialKey,loCaseInsensitive]);
+
+  if (rbNome.Checked) then
+  begin
   qryCadastroCidades.Locate('nome',edtPesquisa.Text,[loPartialKey,loCaseInsensitive]);
+  end;
+
+  if (rbUf.Checked) then
+  begin
+  qryCadastroCidades.Locate('estado',edtPesquisa.Text,[loPartialKey,loCaseInsensitive]);
+  end;
 end;
 
 procedure TfrmCadastroCidades.FormShow(Sender: TObject);
 begin
+  rbNome.Checked := true;
   qryCadastroCidades.Close;
   qryCadastroCidades.Open;
   travaBotoes;

@@ -5,22 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons;
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ComCtrls, Vcl.ExtCtrls;
 
 type
   TfrmCadastroClientes = class(TForm)
-    btnExcluir: TBitBtn;
-    btnEditar: TBitBtn;
-    btnNovo: TBitBtn;
-    btnCancelar: TBitBtn;
-    btnGravar: TBitBtn;
-    Label7: TLabel;
-    edtPesquisa: TEdit;
-    DBGrid1: TDBGrid;
-    Label6: TLabel;
     dsCadastroClientes: TDataSource;
-    Label11: TLabel;
-    dblkCidade: TDBLookupComboBox;
     qryCidades: TADOQuery;
     dsCidades: TDataSource;
     qryCadastroCliente: TADOQuery;
@@ -33,33 +23,50 @@ type
     qryCadastroClienteCOMPLEMENTO: TStringField;
     qryCadastroClienteCODIGO_CIDADE: TIntegerField;
     qryCadastroClientecep: TStringField;
-    Label1: TLabel;
-    dbedtCodigo: TDBEdit;
-    Label2: TLabel;
-    dbedtCpf: TDBEdit;
-    Label3: TLabel;
-    dbedtNome: TDBEdit;
-    Label4: TLabel;
-    dbedtTelefone: TDBEdit;
-    Label5: TLabel;
-    dbedtEndereco: TDBEdit;
-    Label8: TLabel;
-    dbedtBairro: TDBEdit;
-    Label9: TLabel;
-    dbedtComplemento: TDBEdit;
-    Label10: TLabel;
-    dbedtEmail: TDBEdit;
-    Label12: TLabel;
-    dbedtCep: TDBEdit;
     qryVerificaCep: TADOQuery;
-    btnSair: TBitBtn;
     qryVerificaCpf: TADOQuery;
+    qryCadastroClientee_mail: TStringField;
+    Panel2: TPanel;
+    PageControl1: TPageControl;
+    tabConsulta: TTabSheet;
+    Label7: TLabel;
+    edtPesquisa: TEdit;
+    DBGrid1: TDBGrid;
+    tabCadastro: TTabSheet;
+    Label6: TLabel;
+    Label11: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label12: TLabel;
     lblCampos: TLabel;
     Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
-    qryCadastroClientee_mail: TStringField;
+    dblkCidade: TDBLookupComboBox;
+    dbedtCodigo: TDBEdit;
+    dbedtCpf: TDBEdit;
+    dbedtNome: TDBEdit;
+    dbedtTelefone: TDBEdit;
+    dbedtEndereco: TDBEdit;
+    dbedtBairro: TDBEdit;
+    dbedtComplemento: TDBEdit;
+    dbedtEmail: TDBEdit;
+    dbedtCep: TDBEdit;
+    btnNovo: TBitBtn;
+    btnEditar: TBitBtn;
+    btnExcluir: TBitBtn;
+    btnCancelar: TBitBtn;
+    btnGravar: TBitBtn;
+    btnSair: TBitBtn;
+    rbNome: TRadioButton;
+    rbCpf: TRadioButton;
     procedure btnNovoClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -89,6 +96,7 @@ implementation
 {$R *.dfm}
 
 uses U_Conexao;
+
 
 procedure TfrmCadastroClientes.TrocarEstadoBotoes;
 begin
@@ -183,6 +191,7 @@ begin
   end
   else
   begin
+
   qryVerificaCpf.Close;
   qryVerificaCpf.Parameters.ParamByName('cpfCliente').Value := dbedtCpf.Text;
   qryVerificaCpf.Open;
@@ -266,6 +275,7 @@ end;
 
 procedure TfrmCadastroClientes.btnNovoClick(Sender: TObject);
 begin
+  PageControl1.ActivePage := tabCadastro;
   qryCadastroCliente.Insert;
   TrocarEstadoBotoes;
   dbedtCpf.SetFocus;
@@ -281,7 +291,16 @@ end;
 procedure TfrmCadastroClientes.edtPesquisaKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
+  if (rbNome.Checked) then
+  begin
   qryCadastroCliente.Locate('nome',edtPesquisa.Text,[loPartialKey,loCaseInsensitive]);
+  end;
+
+  if (rbCpf.Checked) then
+  begin
+  qryCadastroCliente.Locate('cgc_cpf_cliente',edtPesquisa.Text,[loPartialKey,loCaseInsensitive]);
+  end;
+
 end;
 
 procedure TfrmCadastroClientes.FormClose(Sender: TObject;
@@ -292,6 +311,7 @@ end;
 
 procedure TfrmCadastroClientes.FormShow(Sender: TObject);
 begin
+  rbNome.Checked := true;
   qryCadastroCliente.Close;
   qryCadastroCliente.Open;
   qryCidades.Close;

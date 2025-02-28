@@ -1,0 +1,17 @@
+# Ignorar arquivos compilados
+*.dcu
+*.exe
+*.dll
+*.bpl
+
+# Ignorar arquivos temporários do Delphi
+*.identcache
+*.local
+*.dsk
+
+# Ignorar histórico de versões do Delphi
+forms/__history/
+
+# Ignorar pastas do Windows
+Thumbs.db
+*.log
